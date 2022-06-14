@@ -1,0 +1,4 @@
+{% macro badge(caption, type='default') %}
+  {% set types = { "danger": "bg-danger", "default": "bg-primary" } %}
+	<span class="badge {{types[type]}}">{{caption}}</span>
+{% endmacro %}

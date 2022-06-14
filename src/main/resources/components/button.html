@@ -1,0 +1,11 @@
+{% macro button(caption=null, style='default', additional_classes='') %}
+  {% set styles = { "cta": "btn-primary", "default": "btn-secondary" } %}
+	<button class="btn {{styles[style]}} {{additional_classes}}"{{kwargs | xmlattr }}>
+    {% if caption %}
+      {{ caption }}
+    {% else %}
+      {{ caller() }}
+    {% endif %}
+  </button>
+  
+{% endmacro %}

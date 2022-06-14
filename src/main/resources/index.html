@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% from "components/badge.html" import badge %}
+{% from "components/button.html" import button %}
+{% from "components/card.html" import card %}
+{% from "components/magic_headers.html" import magic_header_section, magic_header %}
+
+{% block content %}
+<div id="app" class="container">
+
+    <h1>Badges</h1>
+    <div>
+        This is a {{ badge("Badge") }}
+    </div>
+
+    <h1 class="mt-5">Buttons</h1>
+    {{ button("Simple Button") }}
+    <hr />
+    {% call button(style="cta", additional_classes="text-uppercase") %}
+      CTA Button with uppercase and {{ badge("Badge", type="danger") }}
+    {% endcall %}
+    <hr />
+    {{ button("Button with additional attributes" ) }}
+    <hr />
+    {{ button("Button with name and value", type="button", name="action", value="delete") }}
+
+    <h1 class="mt-5">Cards</h1>
+    {% set heading %}
+      <span lang="de">Großartige</span> Card with {{ badge("Badge", type="danger") }}
+    {% endset %}   
+    {% call card(heading_level="3", heading=heading, footer="This is the footer!") %}
+      Welcome to the <strong>best card</strong>
+    {% endcall %}
+
+    <hr />
+
+    {% call card(heading_level="3", heading="Another Card with a Link as Header", href="#foo") %}
+        Content baby!
+    {% endcall %}
+
+    <h1 class="mt-5">List</h1>
+
+    <List items=></List>
+
+    <h1 class="mt-5">MagicHeaders</h1>
+
+    {% set heading_level = 6 %}
+    {% call magic_header_section() %}
+        <article>
+            <header>
+                {{ magic_header(heading_level, "Some h1") }}
+                <p class="tagline">
+                    Content
+              </p>
+            </header>
+            {% call magic_header_section(heading_level) %}
+                <section>
+                    {{ magic_header(heading_level, "Some h2") }}
+                </section>
+                <p>Some more content</p>
+                {% call magic_header_section(heading_level) %}
+                    <div class="foo bar">
+                        {{ magic_header(heading_level, "Some h3") }}
+                    </div>
+                    <p>Some more content</p>
+                {% endcall %}
+            {% endcall %}
+            {% call magic_header_section(heading_level) %}
+                <section>
+                    {{ magic_header(heading_level, "Again some h2") }}
+                </section>
+                <p>Some more content</p>
+                {% endcall %}
+        </article>
+    {% endcall %}
+
+    <h1 class="mt-5">Form Group</h1>
+
+    <FieldGroup.Simple type="email" id="my-email"
+        label="eMail"
+        name="users_email" value="BOOM"
+        error="'BOOM' is not a valid eMail addreess" />
+        
+
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% macro magic_header_section(parent_level=0) %}
+  {% set heading_level = parent_level + 1 %}
+  {{ caller(heading_level=heading_level) }}
+{% endmacro %}
+
+{% macro magic_header(heading_level, caption=null) %}
+  {% set h="h" + (heading_level | string) %}
+  <{{h}}>
+    {% if caller %}
+      {{ caller() }}
+    {% else %}
+      {{ caption }}
+    {% endif %}
+  </{{h}}>
+{% endmacro %}

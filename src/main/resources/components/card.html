@@ -1,0 +1,20 @@
+{% macro card(heading, footer=null, href=null, heading_level='1') %} 
+  {% set h = "h" + heading_level %}
+  {% set opts = namespace(heading=heading) %}
+  {% set body = caller(opts) %}
+<section class="card">
+  <div class="card-body">
+    <{{h}} class="card-title"> 
+      {% if href %}
+        <a href="{{href}}"">{{opts.heading}}</a> 
+      {% else %}
+        {{ opts.heading }}
+      {% endif %}
+    </{{h}}>
+    <p class="card-text">{{body}}</p>
+  </div>
+  {% if footer %} 
+    <div class="card-footer">{{footer}}</div> 
+  {% endif %}
+</section> 
+{% endmacro %}
